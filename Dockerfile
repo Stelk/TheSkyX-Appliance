@@ -1,6 +1,14 @@
 FROM debian:buster 
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV XKB_DEFAULT_RULES evdev
+ENV XKB_DEFAULT_MODEL pc105
+ENV XKB_DEFAULT_LAYOUT us
+ENV QT_XKB_CONFIG_ROOT /usr/share/X11/xkb
+
 RUN dpkg --add-architecture armhf
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y apt-utils 
+RUN apt-get install -y \
     libudev-dev:armhf \
     fxload:armhf \
     libc6:armhf \
@@ -19,14 +27,19 @@ RUN apt-get update && apt-get install -y \
     libgomp1:armhf \ 
     xkb-data:armhf \
     xterm \
+    libinput-tools \
     sudo \
     kmod \
-    udev 
+    udev \
+    vim 
 
 ADD http://192.168.1.73/~Astro/TheSkyX-ARM-12545.tar.gz /opt/TheSkyX-ARM-12545.tar.gz 
-RUN tar -xvf /opt/TheSkyX-ARM-12545.tar.gz && rm /opt/TheSkyX-ARM-12545.tar.gz
+RUN tar -xvf /opt/TheSkyX-ARM-12545.tar.gz -C /opt && rm /opt/TheSkyX-ARM-12545.tar.gz
 RUN mkdir /lib/modules && mkdir /lib/modules/5.4.32-rockchip64
 RUN mkdir /root/Desktop
+RUN sed -i -e '/apt-get/s/libudev-dev/libudev-dev:armhf/g' /opt/TheSkyX/install
+RUN sed -i -e '/apt-get/s/fxload/fxload:armhf/g' /opt/TheSkyX/install
+ENV DEBIAN_FRONTEND teletype
  
 CMD ["xterm"]
 
