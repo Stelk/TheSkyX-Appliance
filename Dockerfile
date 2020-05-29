@@ -35,10 +35,12 @@ RUN apt-get install -y \
 
 ADD http://192.168.1.73/~Astro/TheSkyX-ARM-12545.tar.gz /opt/TheSkyX-ARM-12545.tar.gz 
 RUN tar -xvf /opt/TheSkyX-ARM-12545.tar.gz -C /opt && rm /opt/TheSkyX-ARM-12545.tar.gz
+
 RUN mkdir /lib/modules && mkdir /lib/modules/5.4.32-rockchip64
 RUN mkdir /root/Desktop
 RUN sed -i -e '/apt-get/s/libudev-dev/libudev-dev:armhf/g' /opt/TheSkyX/install
 RUN sed -i -e '/apt-get/s/fxload/fxload:armhf/g' /opt/TheSkyX/install
+#RUN cd /opt/TheSkyX && ./install && rm -r /opt/TheSkyX/installfiles && rm /opt/TheSkyX/install
 ENV DEBIAN_FRONTEND teletype
  
 CMD ["xterm"]
