@@ -1,30 +1,37 @@
-Configure a RockPi 4b after reimage using Armbian_20.02.7_Rockpi-4b_buster_current_5.4.28.7z
+# Step 1 - Flash the eMMC memory
+This runbook assumes Armbian_20.02.7_Rockpi-4b_buster_current_5.4.28.7z
+https://dl.armbian.com/rockpi-4b/Buster_current
+Flashing instructions can be found here: https://wiki.radxa.com/Rockpi4/getting_started 
 
-modify the /etc/hosts file to add local file server (e.g. 192.168.1.100 my.http.fileserver)
 
-
+# Step 2 - Install a basic desktop environment
 sudo apt update
 sudo apt upgrade
 sudo reboot
 sudo apt-get install tasksel
-#choose xfce and ssh server
+sudo tasksel # choose xfce and ssh server
+
+# Step 3 (optional) configure network file sharing 
+This step is usefull if you would like to pull files from a central location on your local network.  This is good to keep the size of you filesystem to a minimum
+
+modify the /etc/hosts file to add local file server (e.g. 192.168.1.100 my.http.fileserver)
 sudo apt-get install gvfs-backends gvfs-fuse gvfs-bin
-gio mount smb://avalon.stelk.net/homes
-ln -s ~/.gvfs/'smb-share:server=avalon.stelk.net,share=homes' ~/Development/Avalon
+gio mount smb://my.http.fileserver/homes
+ln -s ~/.gvfs/'smb-share:server=my.http.fileserver,share=homes' ~/share
 
 
-
-#add the section on installing tigervncserver
+# Step 4 install tigervncserver
+I tried other vncservers but they all had issues with TheSkyX and Qt finding the correct keyboard bindings.  
 
 sudo apt-get install tigervnc-standalone-server
 sudo apt-get install tigervnc-common
 sudo useradd vnc
 sudo passwd vnc
 sudo mkhomedir_helper vnc
-# run vnc manually first
+
+run vnc manually 
 sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -localhost no -depth 24 -geometry 1920x1024 :1 
 sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -kill :1 
-
 
 sudo vi /etc/systemd/system/vncserver@:1.service
 sudo chmod 644 vncserver@\:1.service
@@ -50,8 +57,6 @@ ExecStop=/usr/bin/vncserver -kill %i
 
 [Install]
 WantedBy=multi-user.target
-
-
 
 
 
