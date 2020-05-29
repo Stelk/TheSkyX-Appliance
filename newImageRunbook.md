@@ -5,34 +5,41 @@ Flashing instructions can be found here: https://wiki.radxa.com/Rockpi4/getting_
 
 
 # Step 2 - Install a basic desktop environment
+````bash
 sudo apt update
 sudo apt upgrade
 sudo reboot
 sudo apt-get install tasksel
-sudo tasksel # choose xfce and ssh server
+# choose xfce and ssh server
+sudo tasksel 
+````
 
 # Step 3 (optional) configure network file sharing 
 This step is usefull if you would like to pull files from a central location on your local network.  This is good to keep the size of you filesystem to a minimum
 
-modify the /etc/hosts file to add local file server (e.g. 192.168.1.100 my.http.fileserver)
+Modify the /etc/hosts file to add local file server (e.g. 192.168.1.100 my.http.fileserver)
+````bash
 sudo apt-get install gvfs-backends gvfs-fuse gvfs-bin
 gio mount smb://my.http.fileserver/homes
 ln -s ~/.gvfs/'smb-share:server=my.http.fileserver,share=homes' ~/share
-
+````
 
 # Step 4 install tigervncserver
 I tried other vncservers but they all had issues with TheSkyX and Qt finding the correct keyboard bindings.  
-
+````bash
 sudo apt-get install tigervnc-standalone-server
 sudo apt-get install tigervnc-common
 sudo useradd vnc
 sudo passwd vnc
 sudo mkhomedir_helper vnc
-
-run vnc manually 
+````
+run vnc manually
+````bash
 sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -localhost no -depth 24 -geometry 1920x1024 :1 
 sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -kill :1 
-
+````
+Now configure the vncserver to run automatically on reboot
+````bash
 sudo vi /etc/systemd/system/vncserver@:1.service
 sudo chmod 644 vncserver@\:1.service
 sudo systemctl daemon-reload
@@ -41,6 +48,7 @@ systemd-analyze verify /etc/systemd/system/vncserver@\:1.service
 sudo systemctl start vncserver@:1.service
 systemctl status vncserver@:1.service
 sudo systemctl enable vncserver@\:1.service
+````
 
 [Unit]
 Description=Remote desktop service (VNC)
