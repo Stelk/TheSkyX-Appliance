@@ -17,8 +17,8 @@ sudo tasksel
 # Step 3 (optional) configure network file sharing 
 This step is usefull if you would like to pull files from a central location on your local network.  This is good to keep the size of you filesystem to a minimum
 
-Modify the /etc/hosts file to add local file server (e.g. 192.168.1.100 my.http.fileserver)
 ````bash
+sudo echo '192.168.1.100 my.http.fileserver' >> /etc/hosts
 sudo apt-get install gvfs-backends gvfs-fuse gvfs-bin
 gio mount smb://my.http.fileserver/homes
 ln -s ~/.gvfs/'smb-share:server=my.http.fileserver,share=homes' ~/share
