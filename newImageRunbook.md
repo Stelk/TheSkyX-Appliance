@@ -49,7 +49,8 @@ sudo systemctl start vncserver@:1.service
 systemctl status vncserver@:1.service
 sudo systemctl enable vncserver@\:1.service
 ````
-
+place this file into /etc/systemd/system/vncserver@\:1.service
+````
 [Unit]
 Description=Remote desktop service (VNC)
 After=syslog.target network.target
@@ -66,7 +67,7 @@ ExecStop=/usr/bin/vncserver -kill %i
 [Install]
 WantedBy=multi-user.target
 
-
+````
 
 #copy ssh-keys to .ssh
 vnc
