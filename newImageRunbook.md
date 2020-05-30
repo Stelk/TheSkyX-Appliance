@@ -75,6 +75,8 @@ ln -s ~/.gvfs/'smb-share:server=my.http.fileserver,share=homes' ~/share
 
 
 # Step 5 - Configure git
+
+````
 mkdir ~/Development
 cd ~/Development
 git clone https://github.com/akgnah/rockpi-toolkit.git
@@ -83,14 +85,21 @@ cd astro-appliance
 git checkout master
 git config --global user.name "username"
 git config --global user.email "email@address"
+````
 
 # Step 6 - Install Docker 
+
+````
 sudo apt-get install -y docker.io
 sudo systemctl enable docker
 service docker start
 systemctl start docker
+````
 
 # Step 7 - Add ssh credentials
+
+````
 #copy ssh-keys to .ssh
 vnc
 chmod 600 ~/.ssh/id*
+````
