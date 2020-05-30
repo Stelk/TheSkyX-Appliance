@@ -14,7 +14,7 @@ sudo apt-get install tasksel
 sudo tasksel 
 ````
 
-# Step 3 install tigervncserver
+# Step 3 - Install tigervncserver
 I tried other vncservers but they all had issues with TheSkyX and Qt finding the correct keyboard bindings.  
 ````bash
 sudo apt-get install tigervnc-standalone-server
