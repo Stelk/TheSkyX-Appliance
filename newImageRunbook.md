@@ -14,17 +14,7 @@ sudo apt-get install tasksel
 sudo tasksel 
 ````
 
-# Step 3 (optional) configure network file sharing 
-This step is usefull if you would like to pull files from a central location on your local network.  This is good to keep the size of you filesystem to a minimum
-
-````bash
-sudo echo '192.168.1.100 my.http.fileserver' >> /etc/hosts
-sudo apt-get install gvfs-backends gvfs-fuse gvfs-bin
-gio mount smb://my.http.fileserver/homes
-ln -s ~/.gvfs/'smb-share:server=my.http.fileserver,share=homes' ~/share
-````
-
-# Step 4 install tigervncserver
+# Step 3 install tigervncserver
 I tried other vncservers but they all had issues with TheSkyX and Qt finding the correct keyboard bindings.  
 ````bash
 sudo apt-get install tigervnc-standalone-server
@@ -33,7 +23,7 @@ sudo useradd vnc
 sudo passwd vnc
 sudo mkhomedir_helper vnc
 ````
-run vnc manually
+Run vncserver manually to create the directories in /home/vnc
 ````bash
 sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -localhost no -depth 24 -geometry 1920x1024 :1 
 sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -kill :1 
@@ -69,11 +59,22 @@ WantedBy=multi-user.target
 
 ````
 
-#copy ssh-keys to .ssh
-vnc
-chmod 600 ~/.ssh/id*
 
-## configure git
+# Step 4 (optional) configure network file sharing 
+This step is usefull if you would like to pull files from a central location on your local network.  This is good to keep the size of you filesystem to a minimum
+
+````bash
+sudo echo '192.168.1.100 my.http.fileserver' >> /etc/hosts
+sudo apt-get install gvfs-backends gvfs-fuse gvfs-bin
+gio mount smb://my.http.fileserver/homes
+ln -s ~/.gvfs/'smb-share:server=my.http.fileserver,share=homes' ~/share
+````
+
+
+
+
+
+# Step 5 - Configure git
 mkdir ~/Development
 cd ~/Development
 git clone https://github.com/akgnah/rockpi-toolkit.git
@@ -83,9 +84,13 @@ git checkout master
 git config --global user.name "username"
 git config --global user.email "email@address"
 
-
+# Step 6 - Install Docker 
 sudo apt-get install -y docker.io
 sudo systemctl enable docker
 service docker start
 systemctl start docker
 
+# Step 7 - Add ssh credentials
+#copy ssh-keys to .ssh
+vnc
+chmod 600 ~/.ssh/id*
