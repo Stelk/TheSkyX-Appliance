@@ -7,7 +7,7 @@ sudo docker run --net=host \
 		--rm \
 	        --env="DISPLAY" \
 		--volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
-	        --volume="/run/udev/data:/run/udev/data" \
-		--volume="/lib/modules/5.4.32-rockchip64:/lib/modules/5.4.32-rockchip64" \
+	        --volume="/run/udev/data:/run/udev/data:rw" \
+		--volume="/lib/modules/5.4.32-rockchip64:/lib/modules/5.4.32-rockchip64:rw" \
 		--privileged \
 		theskyx xterm

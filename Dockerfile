@@ -39,6 +39,7 @@ RUN apt-get install -y \
     xterm \
     libinput-tools \
     sudo \
+    usbutils \
     kmod \
     udev \
     vim 
@@ -50,7 +51,7 @@ RUN tar -xvf /opt/TheSkyX-ARM-12545.tar.gz -C /opt && rm /opt/TheSkyX-ARM-12545.
 
 # Download and install the settings directory (if you have them)
 ADD http://192.168.1.73/~Astro/TheSkyX.Settings.tar.gz /root/Library/TheSkyX.Settings.tar.gz 
-RUN tar -xvf /root/Library/TheSky.Settings.tar.gz -C /root/Library && rm /root/Library/TheSkyX.Settings.tar.gz
+RUN tar -xvf /root/Library/TheSkyX.Settings.tar.gz -C /root/Library && rm /root/Library/TheSkyX.Settings.tar.gz
 
 # Consider removing now that these are mounted at runtime from the host
 RUN mkdir /lib/modules && mkdir /lib/modules/5.4.32-rockchip64
