@@ -68,24 +68,29 @@ gio mount smb://my.http.fileserver/homes
 ln -s /run/user/$UID/gvfs/'smb-share:server=my.http.server,share=homes' ~/share
 ````
 
+# Step 5 - Add ssh credentials
+
+````
+#copy ssh-keys to .ssh
+chmod 600 ~/.ssh/id*
+````
 
 
 
-
-# Step 5 - Configure git
+# Step 6 - Configure git
 
 ````
 mkdir ~/Development
 cd ~/Development
 git clone https://github.com/akgnah/rockpi-toolkit.git
 git clone git@github.com:Stelk/TheSkyX-Appliance.git
-cd astro-appliance
+cd TheSkyX-Appliance
 git checkout master
 git config --global user.name "username"
 git config --global user.email "email@address"
 ````
 
-# Step 6 - Install Docker 
+# Step 7 - Install Docker 
 
 ````
 sudo apt-get install -y docker.io
@@ -94,10 +99,3 @@ service docker start
 systemctl start docker
 ````
 
-# Step 7 - Add ssh credentials
-
-````
-#copy ssh-keys to .ssh
-vnc
-chmod 600 ~/.ssh/id*
-````
