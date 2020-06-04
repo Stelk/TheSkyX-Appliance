@@ -9,7 +9,7 @@ Flashing instructions can be found here: https://wiki.radxa.com/Rockpi4/getting_
 sudo apt update
 sudo apt upgrade
 sudo reboot
-sudo apt-get install tasksel
+sudo apt-get install tasksel vim git
 # choose ubuntu mate desktop and ssh server
 sudo tasksel 
 ````
