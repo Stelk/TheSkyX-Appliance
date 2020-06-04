@@ -64,9 +64,8 @@ This step is usefull if you would like to pull files from a central location on 
 
 ````bash
 sudo echo '192.168.1.100 my.http.fileserver' >> /etc/hosts
-sudo apt-get install gvfs-backends gvfs-fuse gvfs-bin
 gio mount smb://my.http.fileserver/homes
-ln -s ~/.gvfs/'smb-share:server=my.http.fileserver,share=homes' ~/share
+ln -s /run/user/$UID/gvfs/'smb-share:server=my.http.server,share=homes' ~/share
 ````
 
 
