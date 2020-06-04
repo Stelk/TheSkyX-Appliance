@@ -23,8 +23,8 @@ sudo adduser vnc
 ````
 Run vncserver manually to create the directories in /home/vnc
 ````bash
-sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -localhost no -depth 24 -geometry 1920x1024 :1 
-sudo LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver -kill :1 
+vncserver -localhost no -depth 24 -geometry 1920x1024 :1 
+vncserver -kill :1 
 ````
 Now configure the vncserver to run automatically on reboot
 ````bash
