@@ -10,7 +10,7 @@ sudo apt update
 sudo apt upgrade
 sudo reboot
 sudo apt-get install tasksel
-# choose xfce and ssh server
+# choose ubuntu mate desktop and ssh server
 sudo tasksel 
 ````
 
