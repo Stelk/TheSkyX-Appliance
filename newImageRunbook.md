@@ -30,7 +30,7 @@ vncserver -kill :1
 Now configure the vncserver to run automatically on reboot
 ````bash
 sudo vi /etc/systemd/system/vncserver@:1.service
-sudo chmod 644 vncserver@\:1.service
+sudo chmod 644 /etc/systemd/system/vncserver@:1.service
 sudo systemctl daemon-reload
 systemd-analyze verify /etc/systemd/system/vncserver@\:1.service
 
