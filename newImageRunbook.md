@@ -20,6 +20,7 @@ I tried other vncservers but they all had issues with TheSkyX and Qt finding the
 sudo apt-get install tigervnc-standalone-server
 sudo apt-get install tigervnc-common
 sudo adduser vnc
+sudo usermod -aG sudo vnc
 ````
 Run vncserver manually to create the directories in /home/vnc
 ````bash
